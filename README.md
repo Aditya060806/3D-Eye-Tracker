@@ -1,33 +1,87 @@
-# EyeTracker
-A lightweight, robust Python eye tracker
+# 3D Eye Tracker
+A comprehensive Python-based eye tracking system with multiple tracking modes
 
-This repository is an open-source eye tracking algorithm written in Python. Currently, it is an updated version of the pupil tracker from https://github.com/YutaItoh/3D-Eye-Tracker/blob/master/main/pupilFitter.h that has been optimized and simplified. 
+## Overview
+This repository contains a complete eye tracking solution with basic pupil detection, advanced 3D gaze estimation, and head tracking capabilities. The system is designed for research and development in eye tracking applications.
 
-To use the script, run "python .\OrloskyPupilDetector.py" from your shell. If the hardcoded file path in the select_video() function does not find a video at the specified path, it will open a browse window that allows you to select a video. The process_video() function handles the majority of the processing and can be easily modified to work with a camera capture or image. It returns a rotated_rect that represents the pupil ellipse. A lite version is also included that is more efficient, but less robust. Be sure to have an adequate light source for the lite version. 
+## Quick Start
 
-A test video (eye_test.mp4) is included in the root directory for testing. Algorithm details are explained here: https://www.youtube.com/watch?v=bL92JUBG8xw
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/Aditya060806/3D-Eye-Tracker.git
+cd 3D-Eye-Tracker
 
-When running the script on this test video, your results should look like this: https://youtu.be/B06cUMplDHw.  
+# Install dependencies
+python setup.py
+```
 
-If you need an eye camera with custome LEDs, I have instructions for building your own IR camera for under $100 here: https://www.youtube.com/watch?v=8lZqCMRMtC8
-Alternatively, there is a small $17 IR camera that works well with some modification: https://amzn.to/41x8p2W
+### Running the Tracker
+```bash
+# Easy launcher with menu
+python run.py
 
-To help support this software and other open-source projects, please consider subscribing to my YouTube channel: https://www.youtube.com/@jeoresearch, or joining for $1 per month: https://www.youtube.com/@jeoresearch/join. 
+# Or run specific trackers directly:
+python OrloskyPupilDetector.py          # Full-featured tracker
+python OrloskyPupilDetectorLite.py      # Fast lightweight version
+python 3DTracker/Orlosky3DEyeTracker.py # Advanced 3D tracking
+```
 
-Other useful tools/supplies 
-- Spinel Camera (~$100): https://amzn.to/3D8faQB (price may vary)
-- LEDs for Spinel ($8): https://amzn.to/41rEwAS
-- USB Extension cable x2 ($8): https://amzn.to/4knyf1N (for extending GC0308 cable)
+## Features
 
-Affiliate links on this page help support the channel at no extra cost to you. As an Amazon Associate, I earn from qualifying purchases. All earnings support the development of open-source software and projects like this! 
+### Tracking Modes
+- **Basic Pupil Detection**: Robust ellipse fitting with multiple thresholding levels
+- **3D Eye Tracking**: Real-time gaze vector computation with OpenGL visualization
+- **Head Tracking**: MediaPipe-based head pose estimation for mouse control
+- **Webcam Integration**: Works with standard USB cameras
 
-Requirements:
-- A Python environment
+### Key Capabilities
+- Multi-level binary thresholding for robust pupil detection
+- Ray intersection algorithms for 3D gaze estimation
+- Real-time performance optimization
+- Interactive calibration systems
+- Debug modes with visual overlays
 
-Packages
-- numpy ****There is a known issue with numpy 2.0.0. Downgrading to 1.26.0 or another version can solve this issue.
-- opencv
+## Hardware Requirements
+- USB webcam (any standard camera)
+- For optimal results: IR eye camera (GC0308 recommended)
+- Python 3.7+ environment
 
-Assumptions
-- Works best with 640x480 videos. Images will be cropped to size equally horizontally/vertically if aspect ratio is not 4:3.
-- The image must be that of the entire eye. Dark regions in the corners of the image (e.g. VR display lens borders) should be cropped. 
+## Dependencies
+- OpenCV (computer vision)
+- NumPy (numerical operations)
+- Tkinter (GUI, included with Python)
+- MediaPipe (for head tracking)
+- PyOpenGL (optional, for 3D visualization)
+
+## Controls
+- **SPACE**: Pause/resume
+- **Q**: Quit
+- **D**: Toggle debug mode
+- **C**: Calibrate (3D tracker)
+
+## Project Structure
+```
+3D-Eye-Tracker/
+├── OrloskyPupilDetector.py      # Main pupil detector
+├── OrloskyPupilDetectorLite.py  # Lightweight version
+├── 3DTracker/                   # Advanced 3D tracking
+├── HeadTracker/                 # Head pose tracking
+├── FrontCameraTracker/          # Dual-camera setup
+├── Webcam3DTracker/             # Webcam-based tracking
+├── setup.py                     # Installation script
+├── run.py                       # Easy launcher
+└── eye_test.mp4                 # Test video
+```
+
+## Output
+- Real-time video display with tracking overlays
+- Gaze vector data (CSV format)
+- Unity integration support
+- Performance metrics
+
+## License
+Open source - see LICENSE file for details
+
+## Contributing
+Contributions welcome! Please feel free to submit issues and pull requests.
